@@ -8,7 +8,7 @@ interface ProcessEnv {
 }
 
 const app: ProcessEnv = {
-  PORT: Number(process.env.PORT) || 1337,
+  PORT: Number(process.env.PORT) || 3001,
   MONGO_URI: String(process.env.MONGODB_URL_ONLINE),
 };
 

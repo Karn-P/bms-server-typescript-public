@@ -15,7 +15,7 @@ const config: any = "./configs/app";
 expressConfig(app);
 app.use(route);
 
-const PORT: number = config.PORT || 1337;
+const PORT: number = config.PORT || 3001;
 const server: Server = app.listen(PORT, () => {
   console.log(`Server is on Port ${PORT}`);
 });
