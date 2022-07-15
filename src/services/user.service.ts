@@ -62,15 +62,15 @@ const services = {
       ? model.findOne({}).sort({ _id: -1 })
       : "Please select valid number of cells.";
   },
-  updateParameter(cells: string, updated: any) {
+  updateParameter(cells: string, query: any) {
     const update: UpdatedParameter = {
       recordtime: new Date().toLocaleString(),
-      overtempthreshold: Number(updated.otTh),
-      undertempthreshold: Number(updated.utTh),
-      overvoltagethreshold: Number(updated.ovTh),
-      undervoltagethreshold: Number(updated.uvTh),
-      overcurrentthreshold: Number(updated.ocdTh),
-      shortcircuitthreshold: Number(updated.scdTh),
+      overtempthreshold: Number(query.otTh),
+      undertempthreshold: Number(query.utTh),
+      overvoltagethreshold: Number(query.ovTh),
+      undervoltagethreshold: Number(query.uvTh),
+      overcurrentthreshold: Number(query.ocdTh),
+      shortcircuitthreshold: Number(query.scdTh),
     };
     const model: any = updatedModelSelector(cells);
     return model

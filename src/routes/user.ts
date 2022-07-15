@@ -13,8 +13,8 @@ router.get("/parameters/:cells/:name", usercontrollers.onGetAllOnceByname);
 router.get("/history/:cells", usercontrollers.onGetHistory);
 
 // //* Update parameters from user.
-// router.get("/update/:cells", usercontrollers.onGetUpdates);
-// router.put("/update/:cells", usercontrollers.onUpdates);
-// router.patch("/update/:cells", usercontrollers.onUpdate);
+router.get("/update/:cells", usercontrollers.onGetUpdates);
+router.put("/update/:cells", usercontrollers.onUpdates);
+router.patch("/update/:cells", usercontrollers.onUpdate);
 
 export default router;
