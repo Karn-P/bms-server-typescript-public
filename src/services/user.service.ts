@@ -1,40 +1,102 @@
 import Parameter8S from "../models/Parameter8S.model";
 import Parameter15S from "../models/Parameter15S.model";
-// import Update8S from "../models/Updated8S.model";
-// import Update15S from "../models/Updated15S.model";
+import Update8S from "../models/Updated8S.model";
+import Update15S from "../models/Updated15S.model";
+import { UpdatedParameter } from "../models/Types";
+
+const parameterModelSelector = (cells: string): any => {
+  switch (cells) {
+    case "8":
+      return Parameter8S;
+    case "15":
+      return Parameter15S;
+    default:
+      console.log("Please select valid number of cells.");
+      return;
+  }
+};
+
+const updatedModelSelector = (cells: string): any => {
+  switch (cells) {
+    case "8":
+      return Update8S;
+    case "15":
+      return Update15S;
+    default:
+      console.log("Please select valid number of cells.");
+      return;
+  }
+};
 
 const services = {
-  findAll(cells: string) {
-    return cells === "8"
-      ? Parameter8S.find({}).sort({ _id: -1 })
-      : cells === "15"
-      ? Parameter15S.find({}).sort({ _id: -1 })
-      : console.log("Please select valid number of cells");
+  findAll: (cells: string) => {
+    const model: any = parameterModelSelector(cells);
+    return model
+      ? model.find({}).sort({ _id: -1 })
+      : "Please select valid number of cells.";
   },
-  findAllOnce(cells: string) {
-    return cells === "8"
-      ? Parameter8S.findOne({}).sort({ _id: -1 })
-      : cells === "15"
-      ? Parameter15S.findOne({}).sort({ _id: -1 })
-      : console.log("Please select valid number of cells");
+  findAllOnce: (cells: string) => {
+    const model: any = parameterModelSelector(cells);
+    return model
+      ? model.findOne({}).sort({ _id: -1 })
+      : "Please select valid number of cells.";
   },
-  findAllOnceByName(cells: string, name: string) {
-    return cells === "8"
-      ? Parameter8S.findOne({})
+  findAllOnceByName: (cells: string, name: string) => {
+    const model: any = parameterModelSelector(cells);
+    return model
+      ? model
+          .findOne({})
           .select("" + name)
           .sort({ _id: -1 })
-      : cells === "15"
-      ? Parameter15S.findOne({})
-          .select("" + name)
-          .sort({ _id: -1 })
-      : console.log("Please select valid number of cells");
+      : "Please select valid number of cells.";
   },
-  findHistory(cells: string, value: number) {
-    return cells === "8"
-      ? Parameter8S.find({}).sort({ _id: -1 }).limit(value)
-      : cells === "15"
-      ? Parameter15S.find({}).sort({ _id: -1 }).limit(value)
-      : console.log("Please select valid number of cells");
+  findHistory: (cells: string, value: number) => {
+    const model: any = parameterModelSelector(cells);
+    return model
+      ? model.find({}).sort({ _id: -1 }).limit(value)
+      : "Please select valid number of cells.";
+  },
+  findUpdated(cells: string) {
+    const model: any = updatedModelSelector(cells);
+    return model
+      ? model.findOne({}).sort({ _id: -1 })
+      : "Please select valid number of cells.";
+  },
+  updateParameter(cells: string, updated: any) {
+    const update: UpdatedParameter = {
+      recordtime: new Date().toLocaleString(),
+      overtempthreshold: Number(updated.otTh),
+      undertempthreshold: Number(updated.utTh),
+      overvoltagethreshold: Number(updated.ovTh),
+      undervoltagethreshold: Number(updated.uvTh),
+      overcurrentthreshold: Number(updated.ocdTh),
+      shortcircuitthreshold: Number(updated.scdTh),
+    };
+    const model: any = updatedModelSelector(cells);
+    return model
+      ? model.updateOne(update)
+      : "Please select valid number of cells.";
+  },
+
+  updateParameterOnce(parameters: string, value: number, cells: string) {
+    const model: any = updatedModelSelector(cells);
+    switch (parameters) {
+      case "overtempthreshold":
+        return model.updateOne({ overtempthreshold: value });
+      case "undertempthreshold":
+        return model.updateOne({ undertempthreshold: value });
+      case "overvoltagethreshold":
+        return model.updateOne({ overvoltagethreshold: value });
+      case "undervoltagethreshold":
+        return model.updateOne({ undervoltagethreshold: value });
+      case "overcurrentthreshold":
+        return model.updateOne({ overcurrentthreshold: value });
+      case "shortcircuitthreshold":
+        return model.updateOne({ shortcircuitthreshold: value });
+      default:
+        console.log("Please select valid number of cells");
+        return;
+    }
   },
 };
 

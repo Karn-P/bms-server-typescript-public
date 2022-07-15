@@ -2,11 +2,13 @@
   "name": "bms-server-typescript",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "dist/server.js",
   "scripts": {
+    "clean": "rm -rf dist",
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon ./src/server.ts",
-    "start": "node ./dist/server.js"
+    "start": "yarn run clean && yarn run build && node dist/server.js"
   },
   "keywords": [],
   "author": "",
