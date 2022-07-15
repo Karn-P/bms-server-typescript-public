@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import userService from "../services/user.service";
 
-const methods = {
+const users = {
   async onGetAllParameter(req: Request, res: Response) {
     const { cells } = req.params;
     try {
@@ -78,4 +78,4 @@ const methods = {
   },
 };
 
-export default methods;
+export default users;

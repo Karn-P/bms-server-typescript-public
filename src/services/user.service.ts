@@ -28,7 +28,7 @@ const updatedModelSelector = (cells: string): any => {
   }
 };
 
-const services = {
+const userServices = {
   findAll: (cells: string) => {
     const model: any = parameterModelSelector(cells);
     return model
@@ -100,4 +100,4 @@ const services = {
   },
 };
 
-export default services;
+export default userServices;
