@@ -17,6 +17,13 @@ npm install
 yarn install
 ```
 
+Create .env file
+
+```sh
+PORT=3001
+MONGODB_URL_ONLINE={YOUR_MONGODB_URL}
+```
+
 ## Running the project
 To run this software, you need to follow severals step to configure the behavior of the software. 
 The software will listen on port 3001 by default, which can be run by execute
