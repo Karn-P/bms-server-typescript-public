@@ -49,3 +49,21 @@ _SmartBMS Server_ uses a number of open source projects to work properly:
 - [express] - Node.js web application framework, serving RESTful API.
 - [typescript] - TypeScript compiles to readable, standards-based JavaScript.
 - [mongoose] - Mongoose provides a straight-forward, schema-based solution to model your application data. It includes built-in type casting, validation, query building, business logic hooks and more, out of the box.
+
+## Use Docker
+You can also run this app as a Docker container:
+### Step 1: Clone the repo
+```sh
+git clone https://github.com/Karn-P/bms-server-typescript-public.git
+```
+### Step 2: Build the Docker image
+```sh
+docker build -t bms-server .
+```
+
+### Step 3: Run the Docker container locally with enviroment variables:
+```sh
+docker run -p 3001:3001 -d bms-server \
+   -e PORT=3001
+   -e MONGODB_URL_ONLINE={YOUR_MONGODB_URL}
+```
